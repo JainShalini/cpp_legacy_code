@@ -1,12 +1,12 @@
 #pragma once
 
-#include "OrderProvider.hpp"
+#include "IOrderProvider.hpp"
 
 class ShippingCalculator {
 private:
-    OrderProvider orderProvider;
+    IOrderProvider &orderProvider;
 
 public:
-    ShippingCalculator(OrderProvider &orderProvider);
+    ShippingCalculator(IOrderProvider &orderProvider);
     double calculateShipping(int orderId);
 };

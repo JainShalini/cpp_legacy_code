@@ -6,9 +6,9 @@
 #include <stdexcept>
 #include <string>
 
-ShippingCalculator::ShippingCalculator(OrderProvider &orderProvider)
+ShippingCalculator::ShippingCalculator(IOrderProvider &orderProvider)
+    : orderProvider(orderProvider)
 {
-    this->orderProvider = orderProvider;
 }
 
 double ShippingCalculator::calculateShipping(int orderId)

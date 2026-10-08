@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Order.hpp"
+#include "IOrderProvider.hpp"
 
-class OrderProvider {
+class OrderProvider : public IOrderProvider {
 public:
-    Order fetchOrder(int orderId);
+    Order fetchOrder(int orderId) override;
 };

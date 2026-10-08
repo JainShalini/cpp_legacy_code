@@ -8,10 +8,18 @@ find_package(Boost REQUIRED COMPONENTS json)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
+include(FetchContent)
+FetchContent_Declare(googletest
+    URL https://github.com/google/googletest/archive/v1.14.0.zip
+)
+FetchContent_MakeAvailable(googletest)
+enable_testing()
+
 add_executable(cpp_legacy_code
         main.cpp
         src/ShippingCalculator.cpp
         src/OrderProvider.cpp
+        src/IOrderProvider.hpp
 )
 
 target_include_directories(cpp_legacy_code PRIVATE src)
@@ -36,3 +44,22 @@ if (WIN32)
             $<TARGET_FILE_DIR:cpp_legacy_code>
     )
 endif ()
+
+add_executable(ShippingCalculatorTest
+        test/ShippingCalculatorTest.cpp
+        src/ShippingCalculator.cpp
+        src/OrderProvider.cpp
+)
+
+target_include_directories(ShippingCalculatorTest PRIVATE src)
+
+target_link_libraries(ShippingCalculatorTest PRIVATE
+        gtest_main
+        gtest
+        Boost::json
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        Threads::Threads
+)
+
+add_test(NAME ShippingCalculatorTest COMMAND ShippingCalculatorTest)

@@ -1,4 +1,5 @@
 #include "src/ShippingCalculator.hpp"
+#include "src/OrderProvider.hpp"
 
 #include <iostream>
 #include <stdexcept>
