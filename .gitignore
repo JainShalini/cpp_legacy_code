@@ -3,3 +3,4 @@ build
 cmake-build-debug
 nul
 .claude
+.cache

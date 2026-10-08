@@ -35,8 +35,7 @@ namespace json = boost::json;
 
 using tcp = asio::ip::tcp;
 
-double ShippingCalculator::calculateShipping(int orderId) {
-    try {
+Order ShippingCalculator::fetchOrder(int orderId) {
         const std::string host = "codemanship.co.uk";
         const std::string target =
             "/api/orders.php?orderId=" + std::to_string(orderId);
@@ -85,6 +84,13 @@ double ShippingCalculator::calculateShipping(int orderId) {
             obj.at("weightKg").to_number<double>();
         order.distanceKm =
             obj.at("distanceKm").to_number<double>();
+        
+        return order;
+}
+
+double ShippingCalculator::calculateShipping(int orderId) {
+    try {
+        Order order = fetchOrder(orderId);
 
         if (order.shippingType == "STANDARD") {
             return order.weightKg * 0.5;
