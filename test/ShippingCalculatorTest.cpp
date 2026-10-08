@@ -18,6 +18,11 @@ public:
             order.weightKg = 2.0;
             order.distanceKm = 25.0;
         }
+        else if (orderId == 4) {
+            order.shippingType = "INTERNATIONAL";
+            order.weightKg = 2.0;
+            order.distanceKm = 2000.0;
+        }
         return order;
     }
 };
@@ -41,4 +46,9 @@ TEST_F(ShippingCalculatorTest, CalculatesExpressShipping) {
 TEST_F(ShippingCalculatorTest, CalculatesOvernightShipping) {
     double shipping = calculator.calculateShipping(3);
     EXPECT_DOUBLE_EQ(shipping, 27.4);  // 2.0 * 1.2 + 25
+}
+
+TEST_F(ShippingCalculatorTest, CalculatesInternationalShipping) {
+    double shipping = calculator.calculateShipping(4);
+    EXPECT_DOUBLE_EQ(shipping, 3.0);  
 }
