@@ -11,6 +11,7 @@ find_package(Threads REQUIRED)
 add_executable(cpp_legacy_code
         main.cpp
         src/ShippingCalculator.cpp
+        src/OrderProvider.cpp
 )
 
 target_include_directories(cpp_legacy_code PRIVATE src)

@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    ShippingCalculator calculator;
+    OrderProvider provider;
+    ShippingCalculator calculator{provider};
     const double cost = calculator.calculateShipping(orderId);
     std::cout << "Order " << orderId << " shipping cost: " << cost << std::endl;
 
